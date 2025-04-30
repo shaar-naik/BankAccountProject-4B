@@ -51,6 +51,13 @@ def main():
             if acc_number in accounts:
                 print("Account number already exists.")
                 continue
+            acc_type = input("Do you want a savings account or a checking account?")
+            if acc_type == "Savings" or "savings" or "SAVINGS":
+                check_or_save = False
+            elif acc_type == "checking" or "Checking" or "CHECKING":
+                check_or_save = True
+            else:
+                InvalidTransactionError("That is not a valid account type")
             try:
                 initial = float(input("Enter initial deposit: "))
                 if initial < 0:
