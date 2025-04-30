@@ -1,6 +1,6 @@
 """
 Name: Shaarav Naik Steven Cromwell
-Date: 2/24/2025
+Date: 4/29/2025
 Purpose: To create a simple banking program that allows the user to create an account, deposit money, withdraw money, and check their balance.
 """
 # my-bank.py
@@ -55,7 +55,7 @@ def main():
                 print("Account number already exists.")
                 continue
             acc_type = input("Do you want a savings account or a checking account?").strip().lower()
-            if acc_type == "Savings":
+            if acc_type == "savings":
                 check_or_save = False
                 print("world")
             elif acc_type == "checking":
@@ -112,7 +112,15 @@ def main():
         elif choice == "4":
             account = get_account(accounts)
             if account:
-                account.show_balance()
+                if type(account) == SavingAccount:
+                    years = int(input("How may years has this account been open for? Max holding time is 100 years"))
+                    if years > 100:
+                        print("This value exceeds the maximum account holding time.)")
+                    else:
+                        result = account.showBalance(years)
+                        print("{0:.2f}".format(result))
+                else:
+                    account.show_balance()
 
         elif choice == "5":
             account = get_account(accounts)
