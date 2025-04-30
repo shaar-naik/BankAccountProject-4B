@@ -7,6 +7,7 @@ Purpose: To create a simple banking program that allows the user to create an ac
 import pickle
 import os
 from BankAccount import BankAccount, InvalidTransactionError
+from SavingsAccount import SavingAccount
 
 DATA_FILE = "accounts.dat"
 
@@ -73,7 +74,7 @@ def main():
                 if check_or_save == True:
                     accounts[acc_number] = BankAccount(name, acc_number, initial)
                 elif check_or_save == False:
-                    accounts[acc_number] = SavingAccount(name, accountNumber, initial, rate)
+                    accounts[acc_number] = SavingAccount(name, acc_number, initial, rate)
                 print("Account created successfully.")
             except ValueError:
                 print("Invalid amount.")
