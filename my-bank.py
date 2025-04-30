@@ -30,7 +30,8 @@ def main_menu():
     print("3. Withdraw")
     print("4. Show balance")
     print("5. Show transactions")
-    print("6. Exit")
+    print("6. Get Interest Rate.")
+    print("7. Exit")
     return input("Enter your choice: ")
 
 # Get account by account number safely
@@ -110,6 +111,11 @@ def main():
                 account.show_transactions()
 
         elif choice == "6":
+            account = get_account(accounts)
+            if account:
+                accounts.getInterestRate(interestRate)
+
+        elif choice == "7":
             save_accounts(accounts)
             print("All data saved. Goodbye!")
             break
