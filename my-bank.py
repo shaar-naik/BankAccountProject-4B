@@ -57,16 +57,16 @@ def main():
             acc_type = input("Do you want a savings account or a checking account?").strip().lower()
             if acc_type == "savings":
                 check_or_save = False
-                print("world")
+                
             elif acc_type == "checking":
                 check_or_save = True
-                print("hello")
+                
             else:
                 raise InvalidTransactionError("That is not a valid account type")
             try:
                 initial = float(input("Enter initial deposit: "))
                 if check_or_save == False:
-                    print("here")
+                    
                     try:
                         rate = float(input("Enter your interest rate in percent (between 1% and 25%)"))
                     except ValueError:
@@ -74,15 +74,15 @@ def main():
                     if rate > 25 or rate < 1:
                         raise InvalidTransactionError("Invalid rate, must be between 1% and 25%.")
                 elif check_or_save == True:
-                    print("there")
+                    print(" ")
                 if initial < 0:
                     raise InvalidTransactionError("Initial deposit cannot be negative.")
                 if check_or_save == True:
                     accounts[acc_number] = BankAccount(name, acc_number, initial)
-                    print("there")
+                    
                 elif check_or_save == False:
                     accounts[acc_number] = SavingAccount(name, acc_number, initial, rate)
-                    print("here")
+                    
                 print("Account created successfully.")
             except ValueError:
                 print("Invalid amount.")
