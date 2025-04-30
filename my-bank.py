@@ -54,11 +54,11 @@ def main():
             if acc_number in accounts:
                 print("Account number already exists.")
                 continue
-            acc_type = input("Do you want a savings account or a checking account?")
-            if acc_type == "checking" or "Checking" or "CHECKING":
-                #check_or_save = False
+            acc_type = input("Do you want a savings account or a checking account?").strip().lower()
+            if acc_type == "Savings":
+                check_or_save = False
                 print("world")
-            elif acc_type == "Savings" or "savings" or "SAVINGS":
+            elif acc_type == "checking":
                 check_or_save = True
                 print("hello")
             else:
@@ -79,10 +79,10 @@ def main():
                     raise InvalidTransactionError("Initial deposit cannot be negative.")
                 if check_or_save == True:
                     accounts[acc_number] = BankAccount(name, acc_number, initial)
-                    print("here")
+                    print("there")
                 elif check_or_save == False:
                     accounts[acc_number] = SavingAccount(name, acc_number, initial, rate)
-                    print("there")
+                    print("here")
                 print("Account created successfully.")
             except ValueError:
                 print("Invalid amount.")
@@ -121,8 +121,11 @@ def main():
 
         elif choice == "6":
             account = get_account(accounts)
-            if account:
-                print(account.getInterestRate())
+            try:
+                if account:
+                    print(account.getInterestRate())
+            except (AttributeError, InvalidTransactionError) as e:
+                print(e)
 
         elif choice == "7":
             save_accounts(accounts)
