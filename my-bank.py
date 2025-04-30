@@ -1,13 +1,13 @@
 """
-Name: Shaarav Naik & Steven Cromwell
-Date: 4/29/2025
+Name: Shaarav Naik Steven Cromwell
+Date: 2/24/2025
 Purpose: To create a simple banking program that allows the user to create an account, deposit money, withdraw money, and check their balance.
 """
 # my-bank.py
 import pickle
 import os
-from BankAccount import BankAccount, InvalidTransactionError
-from SavingsAccount import SavingAccount
+from BBankAccount import BankAccount, InvalidTransactionError
+from BBSavingsAccount import SavingAccount
 
 DATA_FILE = "accounts.dat"
 
@@ -31,7 +31,7 @@ def main_menu():
     print("3. Withdraw")
     print("4. Show balance")
     print("5. Show transactions")
-    print("6. Get Interest Rate.")
+    print("6. Get Interest Rate ")
     print("7. Exit")
     return input("Enter your choice: ")
 
@@ -44,6 +44,7 @@ def get_account(accounts):
     return accounts[acc_number]
 
 def main():
+    check_or_save = True
     accounts = load_accounts()
     while True:
         choice = main_menu()
@@ -54,33 +55,40 @@ def main():
                 print("Account number already exists.")
                 continue
             acc_type = input("Do you want a savings account or a checking account?")
-            if acc_type == "Savings" or "savings" or "SAVINGS":
-                check_or_save = False
-            elif acc_type == "checking" or "Checking" or "CHECKING":
+            if acc_type == "checking" or "Checking" or "CHECKING":
+                #check_or_save = False
+                print("world")
+            elif acc_type == "Savings" or "savings" or "SAVINGS":
                 check_or_save = True
+                print("hello")
             else:
-                InvalidTransactionError("That is not a valid account type")
+                raise InvalidTransactionError("That is not a valid account type")
             try:
                 initial = float(input("Enter initial deposit: "))
                 if check_or_save == False:
+                    print("here")
                     try:
                         rate = float(input("Enter your interest rate in percent (between 1% and 25%)"))
                     except ValueError:
                         print("Invalid rate")
-                    if rate < 25 or rate > 1:
-                        InvalidTransactionError("Invalid rate, must be between 1% and 25%.")
+                    if rate > 25 or rate < 1:
+                        raise InvalidTransactionError("Invalid rate, must be between 1% and 25%.")
+                elif check_or_save == True:
+                    print("there")
                 if initial < 0:
                     raise InvalidTransactionError("Initial deposit cannot be negative.")
                 if check_or_save == True:
                     accounts[acc_number] = BankAccount(name, acc_number, initial)
+                    print("here")
                 elif check_or_save == False:
                     accounts[acc_number] = SavingAccount(name, acc_number, initial, rate)
+                    print("there")
                 print("Account created successfully.")
             except ValueError:
                 print("Invalid amount.")
             except InvalidTransactionError as e:
                 print(e)
-        
+
         elif choice == "2":
             account = get_account(accounts)
             if account:
@@ -114,7 +122,7 @@ def main():
         elif choice == "6":
             account = get_account(accounts)
             if account:
-                accounts.getInterestRate(interestRate)
+                print(account.getInterestRate())
 
         elif choice == "7":
             save_accounts(accounts)
@@ -123,6 +131,8 @@ def main():
 
         else:
             print("Invalid option. Please try again.")
+
+
 
 if __name__ == "__main__":
     main()
