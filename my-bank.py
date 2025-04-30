@@ -1,5 +1,5 @@
 """
-Name: Shaarav Naik
+Name: Shaarav Naik Steven Cromwell
 Date: 2/24/2025
 Purpose: To create a simple banking program that allows the user to create an account, deposit money, withdraw money, and check their balance.
 """
